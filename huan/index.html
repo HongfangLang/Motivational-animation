@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	ul{
+		margin:0;
+		padding:0;
+		list-style: none;
+	}
+	li{
+		cursor: pointer;
+	}
+	#box{
+		width:800px;
+		height:400px;
+		border:5px solid cadetblue;
+		margin:0 auto;
+		overflow: hidden;
+	}
+	#box>ul{
+		width:100px;
+		height:100%;
+		float: left;
+	}
+	#box>ul li{
+		line-height: 99px;
+		text-align: center;
+		background:#000;
+		color: #fff;
+		border-bottom: 1px solid #cfcfcf;
+	}
+	#box>ul .active{
+		background: red;
+		color: #000;
+	}
+	#box div{
+		float: left;
+		width:700px;
+		height:100%;
+		position: relative;
+		display: none;
+	}
+	#box img{
+		width:100%;
+		height:100%;
+	}
+	#box div ul{
+		position: absolute;
+		left: 0;
+		bottom: 0;
+	}
+	#box div li{
+		float: left;
+		line-height: 30px;
+		background: #000;
+		opacity: .8;
+		border-right: 1px solid #fff;
+		margin-right: -1px;
+		color: #fff;
+		text-align: center;
+	}
+	#box div .active{
+		background: indianred;
+	}
+	#box img{
+		display: none;
+	}
+</style>
+</head>
+<body>
+	<div id="box">
+		<ul class="navs">
+			<li class="active">暖色调</li>
+			<li>金色夕阳</li>
+			<li>灰色格调</li>
+			<li>baby</li>
+		</ul>
+		<div style="display: block;">
+			<img src="img/img1.gif" style="display: block;"/>
+			<img src="img/img2.gif" />
+			<img src="img/img3.gif" />
+			<img src="img/img4.gif" />
+			<ul>
+				<li class="active" style="width:175px">暖色键盘</li>
+				<li style="width:175px">惬意时光</li>
+				<li style="width:175px">午后</li>
+				<li style="width:175px">一杯苦咖啡</li>
+			</ul>
+		</div>
+		<div>
+			<img src="img/img5.gif" style="display: block;"/>
+			<img src="img/img6.gif" />
+			<ul>
+				<li class="active" style="width:350px">街边夕阳</li>
+				<li style="width:350px">金色稻草</li>
+			</ul>
+		</div>
+		<div>
+			<img src="img/img7.gif" style="display: block;"/>
+			<img src="img/img8.gif" />
+			<img src="img/img9.gif" />
+			<img src="img/img10.gif" />
+			<ul>
+				<li class="active" style="width:175px">灰色通讯</li>
+				<li style="width:175px">咖啡配饼干</li>
+				<li style="width:175px">孤单键盘</li>
+				<li style="width:175px">枯树</li>
+			</ul>
+		</div>
+		<div>
+			<img src="img/img11.gif" style="display: block;"/>
+			<img src="img/img12.gif" />
+			<ul>
+				<li class="active" style="width:350px">素材一</li>
+				<li style="width:350px">素材二</li>
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript">
+		window.onload = function(){
+			var box = document.querySelector('#box');
+			var nav = box.querySelectorAll('.navs li');
+			var cons = box.querySelectorAll('div');
+			var now = 0;
+			var sNow = 0;
+			var timer = setInterval(next,2000);
+			box.onmouseover = function(){  //鼠标移入先关闭定时器
+				clearInterval(timer);
+			}
+			box.onmouseout = function(){  //鼠标移开时打开定时器
+				timer = setInterval(next,2000);
+			}
+			
+			//鼠标移入和自动切换
+			for(var i = 0; i < nav.length; i++){
+				nav[i].index = i;
+				sTab(cons[i]);   //想让小组的进行
+				nav[i].onmouseover = function(){
+					now = this.index;
+					navTab();  //
+					sNavTab();
+				};
+			}
+			
+			
+			function sTab(parent){
+				var sNav = parent.querySelectorAll('ul li');
+//				var sCons = parent.querySelectorAll('img');
+				for(var i = 0; i < sNav.length; i++){
+					sNav[i].index = i;
+					sNav[i].onmouseover = function(){
+						sNow = this.index;
+						sNavTab();
+					};
+				}
+			}
+			document.onclick = function(){
+				next();
+			}
+			
+			
+			//自动切换到下一张
+			function next(){
+				var sNav = cons[now].querySelectorAll('ul li');
+				sNow++;  //从小组开始变化增加，因为有最后一张所以要判断它的过界问题
+				if(sNow >= sNav.length){   //判断如果小组过界，
+					now++;    //就切换到下一个大组navTab()，也要给大组做过界处理
+					if(now >= nav.length){  //如果大组走到头，
+						now = 0;     //从0开始
+					}
+					navTab(); //如果小组过界，就执行大组导航的切换
+				}
+				sNavTab();  //小组随着数量的增加，同时切换小组导航
+			}
+			//切换大组导航
+			function navTab(){
+				for(var i = 0; i < nav.length; i++){
+					nav[i].className = '';
+					cons[i].style.display = "none";
+				}
+				nav[now].className = 'active';
+				cons[now].style.display = "block";
+				sNow = 0;         //确定小选项卡的顺序
+			}
+			
+			//切换小组导航
+			function sNavTab(){
+				var sNav = cons[now].querySelectorAll('ul li'); //要重新获取小选项卡的导航和图片
+				var sCons = cons[now].querySelectorAll('img');
+				for(var i = 0; i < sNav.length; i++){
+					sNav[i].className = '';
+					sCons[i].style.display = "none";
+				}
+				sNav[sNow].className = 'active';
+				sCons[sNow].style.display = "block";
+			}
+		}
+		
+	</script>
+</body>
+</html>

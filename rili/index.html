@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+	a{
+		text-decoration: none;
+	}
+	ul{
+		margin:0;
+		padding:0;
+		list-style: none;
+	}
+	/*a:hover {
+		text-decoration: blink;
+	}*/
+	.wrap{
+		position: relative;
+		width:600px;
+		height: 460px;
+		border:5px solid salmon;
+		border-radius: 20px;
+		margin:0 auto;
+	}
+	h1{
+		text-align: center;
+		color: seagreen;
+		font-family: '宋体';
+	}
+	.right{
+		float: right;
+		position: relative;
+		width:200px;
+		height: 200px;
+		right:30px;
+		border:5px solid #000;
+		border-radius: 50%;
+		background: #CCCCCC;
+	}
+	.list{
+		width:99%;
+		height:99%;
+		margin:0;
+		padding:0;
+		list-style: none;
+		position: relative;
+		/*border: 2px solid blue;*/
+		border-radius: 50%;
+	}
+	.list li{
+		position: absolute;
+		top:5px;
+		left:99px;
+		width:1px;
+		height:8px;
+		background: red;
+		transform-origin: center 94px; 
+	}
+	.list li:nth-of-type(5n+1){
+		position: absolute;
+		top:2px ;
+		height: 13px;
+		width:2px;
+		background: #000;
+		transform-origin: center 98px;
+	}
+	.list li:nth-of-type(1){
+		position: absolute;
+		transform: rotate(0);
+	}
+	#hours{
+		position: absolute;
+		left: 97px;
+		top:40px;
+		width:6px;
+		height:60px;
+		background: red;
+		transform-origin: bottom;
+	}
+	#hours:after{
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: -15px;
+		width:100%;
+		height: 15px;
+		background: red;
+	}
+	#minutes{
+		position: absolute;
+		left: 98px;
+		top:30px;
+		width:4px;
+		height:70px;
+		background: yellow;
+		transform-origin: bottom;
+	}
+	#minutes:after{
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: -15px;
+		width: 100%;
+		height:15px;
+		background: yellow;
+	}
+	#seconds{
+		position: absolute;
+		left: 99px;
+		top:5px;
+		width:2px;
+		height:95px;
+		background: green;
+		transform-origin: bottom;
+	}
+	#seconds:after{
+		content: "";
+		position: absolute;
+		left:0;
+		bottom: -20px;
+		width:100%;
+		height:20px;
+		background: green;
+	}
+	#icon{
+		position: absolute;
+		left: 92px;
+		top:93px;
+		width:18px;
+		height:18px;
+		background: #000;
+		border-radius: 50%;
+	}
+	h2{
+		text-align: center;
+		color: palevioletred;
+		margin-top: 50px;
+	}
+	.right p{
+		text-align: center;
+		color: blueviolet;
+		font-size: 20px;
+	}
+	
+	
+	.left{
+		margin: 10px;
+		width:280px;
+		height:320px;
+		float: left;
+		position: relative;
+		overflow: hidden;
+	}
+	#ym{
+		border:none;
+		text-align: center;
+	}
+	.weekk {
+		margin-top: 20px;
+		font-size: 0;
+	}
+	.weekk span{
+		font-size: 16px;
+		display: inline-block;
+		width:35px;
+		margin-right: 5px;
+		text-align: center;
+		/*background: burlywood;*/
+	}
+	.yList{
+		float: left;
+		padding:0;
+		list-style: none;
+		height:300px;
+		width:280px;
+		margin:0;
+	}
+	.xList{
+		float: left;
+		padding:0;
+		list-style: none;
+		height:300px;
+		width:280px;
+		margin:0;
+	}
+	.yList li{
+		float: left;
+		width:40px;
+		height:40px;
+		line-height: 40px;
+		background: cornflowerblue;
+		text-align: center;
+	}
+	.xList li{
+		float: left;
+		width:40px;
+		height:40px;
+		line-height: 40px;
+		background: cornflowerblue;
+		text-align: center;
+	}
+	.line{
+		position: absolute;
+		top: 80px;
+		width: 560px;
+
+	}
+	.monthList{
+		position: absolute;
+		top: 30px;
+		width: 600px;
+		height:300px;
+
+		display: none;
+	}
+	.months{
+		width:300px;
+		height:260px;
+		position: absolute;
+		left: 0;
+		top:30px;
+		background: #fff;
+	}
+	.monthss{
+		display: none;
+		width:300px;
+		height:260px;
+		position: absolute;
+		left: 300px;
+		top:30px;
+		background: #fff;
+	}
+	.months li{
+		float: left;
+		width:50px;
+		height:70px;
+		margin:6px;
+		/*margin:10px;*/
+	/*	background: green;*/
+		text-align: center;
+		line-height: 70px;
+	}
+	.monthss li{
+		float: left;
+		width:50px;
+		height:70px;
+		margin:6px;
+		/*margin:10px;*/
+	/*	background: green;*/
+		text-align: center;
+		line-height: 70px;
+	}
+	.months li:hover{
+		background: red;
+		color: #fff;
+	}
+	.monthss li:hover{
+		background: red;
+		color: #fff;
+	}
+	.first{
+		display: block;
+	}
+	.second{
+		display: none;
+	}
+	.second strong{
+		position: absolute;
+		left: 75px;
+		top:0;
+	}
+	#prevs{
+		position: absolute;
+		left: 0;
+		top:2px;
+	}
+	#nexts{
+		position: absolute;
+		left: 143px;
+		top:2px;
+	}
+	.show{
+		background: green;
+		color: #fff;
+	}
+</style>
+</head>
+<body>
+<div class="wrap">
+	<a href="#"><h1 >0000年00月00日</h1></a>
+	<div class="left">
+	<div class="first">
+		<input type="button" value="prev" id="prev"/>
+		<strong style="cursor: pointer;"></strong>
+		<input type="button" value="next" id="next"/>
+	</div>
+	<div class="second">
+		<input type="button" value="prev" id="prevs"/>
+		<strong style="cursor: pointer;"></strong>
+		<input type="button" value="next" id="nexts"/>
+	</div>	
+		
+		<!--中间星期日期大模块-->
+	<div >
+		<div class="weekk">
+			<span>日</span>
+			<span>一</span>
+			<span>二</span>
+			<span>三</span>
+			<span>四</span>
+			<span>五</span>
+			<span>六</span>
+			
+		</div>
+		<div class="line">
+			<ul class="yList"></ul>
+			<ul class="xList"></ul>
+		</div>
+		<div class="monthList">
+			<ul class="months">
+				<li>一月</li>
+				<li>二月</li>
+				<li>三月</li>
+				<li>四月</li>
+				<li>五月</li>
+				<li>六月</li>
+				<li>七月</li>
+				<li>八月</li>
+				<li>九月</li>
+				<li>十月</li>
+				<li>十一月</li>
+				<li>十二月</li>
+			</ul>
+			<ul class="monthss">
+				<li>一月</li>
+				<li>二月</li>
+				<li>三月</li>
+				<li>四月</li>
+				<li>五月</li>
+				<li>六月</li>
+				<li>七月</li>
+				<li>八月</li>
+				<li>九月</li>
+				<li>十月</li>
+				<li>十一月</li>
+				<li>十二月</li>
+			</ul>
+		</div>
+	 </div>
+ </div>	
+
+	<div class="right">
+		<ul class="list">
+		
+		</ul>
+		<div id="hours"></div>
+		<div id="minutes"></div>
+		<div id="seconds"></div>
+		<div id="icon"></div>
+		<h2>00:00:00</h2>
+		<p>星期日</p>
+	</div>
+</div>
+<script type="text/javascript" src="tween.js"></script>
+<script type="text/javascript">
+
+    //   1----生成当前的  年、月、日
+    
+    (function(){
+    	var h1 = document.querySelector('h1');
+    	var time = new Date();
+		var year = time.getFullYear();
+		var month = ad(time.getMonth()+1);
+		var day = ad(time.getDate());
+		h1.innerHTML = year+'年'+month+'月'+day+'日';
+		function ad(n){
+			return n < 10?"0"+n:''+n;
+		};
+    })();
+	
+	//   2----生成表盘
+	
+	(function(){
+		var list = document.querySelector('.list');
+		var inner = '';
+		for(var i = 0; i < 60; i++){
+			inner += '<li style = "transform:rotate('+i*6+'deg)"></li>';
+		}
+		list.innerHTML = inner;
+	})();
+	
+	//   3----时钟转动
+	
+	(function(){
+		var hours = document.querySelector('#hours');
+		var minutes = document.querySelector('#minutes');
+		var seconds = document.querySelector('#seconds');
+		setInterval(times,1000);
+		times();
+		function times(){
+			var time = new Date();
+			var second = time.getSeconds();
+			var minute = time.getMinutes();
+			var hour = time.getHours();
+			seconds.style.transform = 'rotate('+second*6+'deg)';
+			minutes.style.transform = 'rotate('+minute*6+'deg)';
+			hours.style.transform = 'rotate('+hour*30+'deg)';
+		}
+	})();
+	
+	//    4----电子时钟和星期
+	
+	(function(){
+		var arr = ['日','一','二','三','四','五','六'];
+		setInterval(timeD,1000);
+		timeD();
+		function timeD(){
+			var h2 = document.querySelector('h2');
+			var p = document.querySelector('p');
+			var time = new Date();
+			var second = ad(time.getSeconds());
+			var minute = ad(time.getMinutes());
+			var hour = ad(time.getHours());
+			var week = time.getDay();
+			h2.innerHTML = hour +':'+ minute +':'+ second; 
+			p.innerHTML = '星期'+arr[week];
+		}
+		function ad(n){
+			return n < 10?"0"+n:''+n;
+		};
+	})();
+	 
+	//    5----日历
+	function getday(year,month){//最后一天是几号
+		var lastday = new Date(year,month+1,0).getDate();
+		return lastday;
+	};
+	function getweek(year,month){//第一天是星期几
+		return new Date(year,month,1).getDay();
+	};
+	function setnow(year,month,xList,nowDay){
+		//获取当天取是几号
+	    var nowmonth= new  Date().getMonth();
+		var day = getday(year,month); //当月总共有多少天
+		var prevday = getday(year,month-1);
+		// console.log(prevday)
+		var week = getweek(year,month);               //当月的第一天是星期几
+		var boxs = Math.ceil((day+week)/7)*7;//总共有多少个格子
+		var inner = '';	
+		for(var i = 1; i <= boxs; i++){           //从第一个格子到最后一个格子循环
+			var num = i - week;                   //月初前面有多少个格子
+			if(num <= 0){                         //
+				num = num+prevday;
+				inner += '<li style="background:pink">'+num+'</li>';
+
+			}else if(num > day){
+				num = num-day;
+				inner += '<li style="background:#97E8C3">'+num+'</li>';
+			} else{
+				// 除当月外其他每月1号高亮
+				if( nowmonth != month && num == 1){//
+					inner += '<li style ="background:red">'+num+'</li>';
+				}else if(nowmonth == month &&   nowDay == num){//
+					inner += '<li style ="background:red">'+num+'</li>';
+				}else{
+					inner += '<li>'+num+'</li>';
+				}
+				
+			}
+			
+		}
+		xList.innerHTML = inner;
+	};
+	(function (){
+		var time = new Date();
+		var year = time.getFullYear();
+		var month = time.getMonth();
+		var day = time.getDate();
+		var line = document.querySelector('.line');
+		var weekk = document.querySelector('.weekk');
+		var yList = document.querySelector('.yList');
+		var xList = document.querySelector('.xList');
+		var prev = document.querySelector('#prev');
+		var next = document.querySelector('#next');
+		var first = document.querySelector('.first');
+		var second = document.querySelector('.second');
+		var strong = document.querySelector('.first strong');
+		var strongs = document.querySelector('.second strong');
+		
+		var h1 = document.querySelector('h1');
+		//setnow(year,month+1,xList);
+		setnow(year,month,yList,day);
+		strong.innerHTML = year+'年'+ (month+1)+'月';
+		// alert(day);
+		prev.onclick = function(){
+			
+			month--;
+			if(month<0){
+				month=11;
+				year--;
+			}
+			
+			strong.innerHTML = year+'年'+ (month+1)+'月';
+			css(line,'marginLeft',-280);
+			//setnow(year,month+1,xList);//获取下一个月
+			setnow(year,month,yList,day); //获取当前月
+			setnow(year,month,xList,day);
+			startMove(line,{marginLeft: 0},400,"linear");
+		};
+
+		next.onclick = function (){
+			month++;
+			if(month>11){
+				month=0;
+				year++;
+			}
+			strong.innerHTML = year+'年'+ (month+1)+'月';
+			css(line,'marginLeft',0);
+			setnow(year,month,xList,day);
+			setnow(year,month,yList,day);
+			//setnow(year,month-1,yList,);
+			startMove(line,{marginLeft: -280},400,"linear");
+		};
+		h1.onclick = function (){
+			var today = new Date();
+			var yearT = today.getFullYear();
+			var monthT = today.getMonth();
+			var dayT = today.getDate();
+			var months = document.querySelector('.months');
+			var monthList = document.querySelector('.monthList');
+			setnow(yearT,monthT,xList,day);
+			setnow(yearT,monthT,yList,day);
+			strong.innerHTML = yearT+'年'+ (monthT+1)+'月';
+			month=monthT;
+			strongs.innerHTML = yearT+'年'+ (monthT+1)+'月';
+			setnow(yearT,monthT,xList,day);
+			setnow(yearT,monthT,yList,day);
+			first.style.display = 'block';
+			second.style.display = 'none';
+			monthList.style.display = 'none';
+
+		};
+		strong.onclick = function(){
+			var todays = new Date();
+			var yearTs = todays.getFullYear();
+			var monthTs = todays.getMonth()+1;
+			var dayTs = todays.getDate();
+			var months = document.querySelectorAll('.monthList ul');
+			// var lis = document.querySelectorAll('.months li');
+			var monthss = document.querySelector('.monthss');
+			var monthList = document.querySelector('.monthList');
+			var prevs = document.querySelector('#prevs');
+			var nexts = document.querySelector('#nexts');
+			//months.style.display = 'block';
+			monthss.style.display = 'block';
+			first.style.display = 'none';
+			second.style.display = 'block';
+			weekk.style.display = 'none';
+			strongs.innerHTML = yearTs;
+			lisClick();
+			prevs.onclick = function(){
+				yearTs--;
+				strongs.innerHTML = yearTs;
+				css(monthList,'marginLeft',-300);
+				startMove(monthList,{marginLeft: 0},400,"linear");
+				lisClick();
+			
+			};
+			nexts.onclick = function(){
+				yearTs++;
+				strongs.innerHTML = yearTs;
+				css(monthList,'marginLeft',0);
+				startMove(monthList,{marginLeft: -300},400,"linear");
+				lisClick();
+			};
+			function lisClick(){
+				for(var j = 0; j < months.length; j++){
+					var lis = months[j].querySelectorAll("li");
+					for(var i = 0; i < lis.length; i++){
+						lis[i].index = i;
+						if(monthTs == i+1){
+							lis[i].style.background = 'green';
+							
+						}
+						console.log(i);
+						lis[i].onclick = function(){
+							monthTs = this.index;//当前选中的为当月
+							yearTs = strongs.innerHTML;
+							console.log(yearTs,monthTs);
+							setnow(yearTs,monthTs,yList,dayTs);
+							setnow(yearTs,monthTs,xList,dayTs);
+							strong.innerHTML = yearTs+'年'+(monthTs+1)+'月';
+							monthList.style.display = 'none';
+							first.style.display = 'block';
+							second.style.display = 'none';
+							weekk.style.display = 'block';
+						}
+					};
+				}
+			};
+			monthList.style.display = 'block';
+			
+			// for(var i = 0; i < lis.length; i++){
+			// 	lis[i].index = i;
+			// 	if(monthTs == i+1){
+			// 		lis[i].style.background = 'green';
+					
+			// 	}
+			// 	lis[i].onclick = function(){
+			// 		monthTs = this.index;//当前选中的为当月
+			// 		yearTs = strongs.innerHTML;
+			// 		console.log(yearTs,monthTs);
+			// 		setnow(yearTs,monthTs,yList,dayTs);
+			// 		setnow(yearTs,monthTs,xList,dayTs);
+			// 		strong.innerHTML = yearTs+'年'+(monthTs+1)+'月';
+			// 		monthList.style.display = 'none';
+			// 		first.style.display = 'block';
+			// 		second.style.display = 'none';
+			// 		weekk.style.display = 'block';
+			// 	}
+			// }
+			
+
+		};
+
+	})();
+
+	
+	//点击当月回到当月日历
+
+//	function cender(yeara,montha){
+//		var lastday2 = new Date(year,month,0).getDate();
+//		var inner = '';	
+//		inner += '<li>'+num+'</li>';
+//		for(var i = 1; i <= boxs; i++){
+//			var num = i - firstweek;
+//			if(num <= 0){
+//				num = num+lastday2;
+//			}else if(num > lastday){
+//				num = num-lastday;
+//			}
+//			xList.innerHTML += inner;
+//		}
+//	};
+//	(function(){
+		//生成星期
+//		var yList = document.querySelector('.yList');
+//		
+//		var inner = '';
+//		
+//		
+//		var time = new Date();
+//		var year = time.getFullYear();
+//		var month = time.getMonth()+1;
+//		var day = time.getDate();
+		
+//		showCalendar(year,month,day,getFirstDay(year,month));
+		
+//		var num=31;
+//		
+//		for(var i = 0; i < 7; i++){
+//		 for(var j = 0; j < 7; j++){
+//				inner += '<li style="top:'+j*40+'px;left:'+i*40+'px">'+(num--)+'</li>';
+//			}
+//			//当前时间的最后一天
+//			//var 
+//		}
+//		yList.innerHTML = inner;  
+		
+//	})();
+	
+	//显示日历
+//function showCalendar(_year,_month,_day,firstDay) {
+//  var i = 0,
+//      monthDay = 0,
+//      showStr = "",
+//      _classname = "",
+//      today = new Date();
+//      //月份的天数
+//  switch(_month) {
+//      case 1: monthDay = 31; break;
+//      case 2:
+//          if(runNian(_year)) { monthDay = 29; }
+//          else { monthDay = 28; }
+//          break;
+//      case 3: monthDay = 31; break;
+//      case 4: monthDay = 30; break;
+//      case 5: monthDay = 31; break;
+//      case 6: monthDay = 30; break;
+//      case 7: monthDay = 31; break;
+//      case 8: monthDay = 31; break;
+//      case 9: monthDay = 30; break;
+//      case 10: monthDay = 31; break;
+//      case 11: monthDay = 30; break;
+//      case 12: monthDay = 31; break;
+//  }
+//
+//  //输出日历表格，这部分因结构而异
+//  showStr = "<table class='cld-w'><thead>";
+//  //日历头部
+// // showStr += "<tr><th colspan='7'><div class='cld-hd'><span class='cld-pre'>&lt;</span><em id='showDate' value='" + _year + "-" + _month + "-" + _day + "'>" + _year + "年" + _month + "月" + _day + "日" + "</em><span class='cld-next'>&gt;</span></div></th></tr>";
+//  //日历星期
+//  showStr += "<tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>";
+//  showStr += "</thead><tbody><tr>";
+//  //当月第一天前的空格
+//  for (i=1; i<=firstDay; i++) {
+//      showStr += "<td></td>";
+//  }
+//  //显示当前月的天数
+//  for (i=1; i<=monthDay; i++) {
+//      //当日的日期
+//      if(_year === today.getFullYear() && _month === today.getMonth()+1 && i === today.getDate()) {
+//          _classname = "cld-cur"; 
+//      } 
+//      //当日之前的日期（这个判断是因为我有工作需求，就是要求之前的日期不能点击）
+//      else if(_year < today.getFullYear() || (_year === today.getFullYear() && _month <= today.getMonth()) || (_year === today.getFullYear() && _month === today.getMonth()+1 && i < today.getDate()) ) {
+//          _classname = "cld-old";
+//      }
+//      //其他普通的日期
+//      else { _classname = "cld-day"; }
+//      //其他大于当月的月份的相同日期（为了让点击下一月的时候，相同的日期增加cld-cur类）
+//      if(_day === i && (_year > today.getFullYear() || _month > today.getMonth()+1)) { _classname = "cld-cur"; }
+//      //把日期存在对应的value       
+//      showStr += "<td class=" + _classname + " value='" + _year + "-" + _month + "-" + i + "'>" + i + "</td>";
+//
+//      firstDay = (firstDay+1)%7;
+//      if(firstDay === 0 && i !== monthDay) {
+//          showStr += "</tr><tr>";
+//      } 
+//  }
+//  
+//  //剩余的空格
+//  if(firstDay!==0) {
+//      for (i=firstDay; i<7; i++) {
+//          showStr += "<td></td>";
+//      }
+//  }
+//      
+//  showStr +="</tr></tbody></table>";
+//  //插入calendar的页面结构里
+//  var yList = document.querySelector('.yList');
+//  yList.innerHTML  = showStr;
+//}
+//
+//	
+//	//判断闰年
+//function runNian(_year) {
+//  if(_year%400 === 0 || (_year%4 === 0 && _year%100 !== 0) ) {
+//      return true;
+//  }
+//  else { return false; }
+//}
+//
+////判断某年某月的1号是星期几
+//function getFirstDay(_year,_month) {
+//  var allDay = 0, y = _year-1, i = 1;
+//  allDay = y + Math.floor(y/4) - Math.floor(y/100) + Math.floor(y/400) + 1;
+//  for ( ; i<_month; i++) {
+//      switch (i) {
+//          case 1: allDay += 31; break;
+//          case 2: 
+//              if(runNian(_year)) { allDay += 29; }
+//              else { allDay += 28; }
+//              break;
+//          case 3: allDay += 31; break;
+//          case 4: allDay += 30; break;
+//          case 5: allDay += 31; break;
+//          case 6: allDay += 30; break;
+//          case 7: allDay += 31; break;
+//          case 8: allDay += 31; break;
+//          case 9: allDay += 30; break;
+//          case 10: allDay += 31; break;
+//          case 11: allDay += 30; break;
+//          case 12: allDay += 31; break;
+//      }
+//  }
+//  return allDay%7;
+//}
+//	//获取当前的时间
+//	
+</script>
+</body>
+</html>
